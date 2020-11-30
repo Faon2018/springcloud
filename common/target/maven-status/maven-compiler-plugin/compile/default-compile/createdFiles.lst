@@ -1,0 +1,10 @@
+com\faon\springcloud\entities\Role.class
+com\faon\springcloud\entities\Menu.class
+com\faon\springcloud\entities\User.class
+com\faon\springcloud\entities\UserRole.class
+com\faon\springcloud\util\ResponsResult.class
+com\faon\springcloud\entities\PermissionOperation.class
+com\faon\springcloud\entities\Operation.class
+com\faon\springcloud\entities\Permission.class
+com\faon\springcloud\entities\PermissionMenu.class
+com\faon\springcloud\entities\RolePermission.class
