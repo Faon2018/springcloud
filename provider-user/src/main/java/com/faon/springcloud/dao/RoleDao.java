@@ -8,5 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface RoleDao {
+
     List<Role> selectRolesByUserId(@PathVariable("userId") int userId);
 }

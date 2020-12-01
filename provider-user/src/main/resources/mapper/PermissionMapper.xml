@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.faon.blog.mapper.PermissionMapper">
+<mapper namespace="com.faon.springcloud.dao.PermissionDao">
 
-    <resultMap id="BaseResultMap" type="com.faon.blog.entity.SystemPermission">
+    <resultMap id="BaseResultMap" type="com.faon.springcloud.entities.Permission">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="status" jdbcType="INTEGER" property="status" />
-        <collection property="systemPermissionMenus" column="id" ofType="SystemPermissionMenu" select="com.faon.blog.mapper.PermissionMenuMapper.findByPermissionId"/>
-        <collection property="systemPermissionOperations" column="id" ofType="com.faon.blog.entity.SystemPermissionOperation" select="com.faon.blog.mapper.PermissionOperationMapper.findByPermissionId"/>
+        <collection property="menus" column="id" ofType="Menu" select="com.faon.springcloud.dao.MenuDao.selectMenusByPermissionId"/>
+        <collection property="operations" column="id" ofType="Operation" select="com.faon.springcloud.dao.OperationDao.selectOperationsByPermissionId"/>
     </resultMap>
     <sql id="table">
-        permission
+        permission p
     </sql>
     <sql id="selectField">
-        id,`name`,status
+        p.id,p.`name`,p.status
     </sql>
 
-    <select id="findPermissionByPermissionId" resultMap="BaseResultMap">
+    <select id="selectPermissionsByRoleId" parameterType="int" resultMap="BaseResultMap">
         select
         <include refid="selectField"/>
         from
         <include refid="table"/>
-        where id = #{permissionId} and status = 0
+        inner join  foreign_role_permission rp on  rp.permission_id = p.id and rp.status = 0
+        where rp.role_id = #{roleId} and p.status = 0
     </select>
 
 

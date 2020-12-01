@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.faon.blog.mapper.PermissionMenuMapper">
+<mapper namespace="com.faon.springcloud.dao.PermissionMenuMapper">
 
-    <resultMap id="BaseResultMap" type="com.faon.blog.entity.SystemPermissionMenu">
+    <resultMap id="BaseResultMap" type="com.faon.springcloud.entities.PermissionMenu">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="permission_id" jdbcType="INTEGER" property="permissionId" />
         <result column="menu_id" jdbcType="INTEGER" property="menuId" />
         <result column="status" jdbcType="INTEGER" property="status"/>
-        <association property="systemMenu" column="menu_id" javaType="com.faon.blog.entity.SystemMenu" select="com.faon.blog.mapper.MenuMapper.findMenuByMenuId"/>
     </resultMap>
     <sql id="table">
         foreign_permission_menu
@@ -16,13 +15,7 @@
         id,permission_id,menu_id,status
     </sql>
 
-    <select id="findByPermissionId" resultMap="BaseResultMap">
-        select
-        <include refid="selectField"/>
-        from
-        <include refid="table"/>
-        where permission_id = #{permissionId} and status = 0
-    </select>
+
 
 
 

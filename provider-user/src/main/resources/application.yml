@@ -20,8 +20,23 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
   type-aliases-package: com.faon.springcloud.entities
 
+
+
+
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+#数据库表
+blog:
+  table:
+    user: user
+    userRole: foreign_user_role
+    role: role
+    rolePermission: foreign_role_permission
+    permission: permission
+    permissionMenu: foreign_permission_menu
+    menu: men
+    permissionOperation: foreign_permission_operation
+    operation: operation
