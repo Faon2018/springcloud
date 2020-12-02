@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-@RequestMapping("/consum/blog/api")//消费者对外api接口
+//@CrossOrigin(origins = "http://example.com")//允许来自example.com的请求调用
+@RequestMapping("/consum/blog/api/")//消费者对外api接口
 @RestController
 public class TestController {
     @Resource
     private RestTemplate restTemplate;
-    @GetMapping("/consum/blog/get/{id}")
+    @GetMapping("/get/{id}")
     public User test(@PathVariable("id") int id){
         return  restTemplate.getForObject("http://provider-user-service/provider/user/select/"+id,User.class);
     }
