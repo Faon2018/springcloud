@@ -28,16 +28,17 @@
             password: '',
           },
           card_st:{
-            width:'25%',
-            marginTop:window.outerHeight/3+'px',
-            marginLeft:window.outerWidth/3+'px'
+             width:'25%',
+             marginTop:window.outerHeight/3+'px',
+             marginLeft:window.outerWidth/3+'px',
+             float:"left"
           }
         };
       },
       methods: {
         submitForm() {
           login(this.ruleForm).then((res)=>{
-
+            this.$router.push('/');
           }).catch(()=>{
             console.log(1);
           })
@@ -51,4 +52,8 @@
 </script>
 
 <style scoped>
+  .login-card{
+    height: 845px;
+   background-image: url("../assets/backgroud.jpg");
+  }
 </style>

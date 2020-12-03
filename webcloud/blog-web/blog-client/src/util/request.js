@@ -35,7 +35,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(response => {
   const res = response.data;
   // 如果返回的状态不是200 就主动报错
-  if(res.state != 200){
+  if(res.code != 200){
     return Promise.reject(res.message || 'error')
   }
   return response;
