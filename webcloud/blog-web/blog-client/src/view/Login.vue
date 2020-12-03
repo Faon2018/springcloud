@@ -1,5 +1,5 @@
 <template>
-  <div class="login-card" :style="card_div">
+  <div class="login-card">
     <el-card shadow="hover" :style="card_st">
       <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
@@ -9,8 +9,8 @@
           <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm()">提交</el-button>
+          <el-button @click="resetForm()">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import { login } from '@/interface/user'
     export default {
         name: "Login",
       data() {
@@ -34,11 +35,15 @@
         };
       },
       methods: {
-        submitForm(formName) {
+        submitForm() {
+          login(this.ruleForm).then((res)=>{
 
+          }).catch(()=>{
+            console.log(1);
+          })
         },
-        resetForm(formName) {
-          this.$refs[formName].resetFields();
+        resetForm() {
+
         },
 
       }

@@ -19,13 +19,12 @@ public class TestController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
     public ResponsResult login(User user){
-//        return  restTemplate.getForObject("http://provider-user-service/provider/user/select/"+id,User.class);
+        User userInfo = restTemplate.getForObject("http://provider-user-service/provider/user/select/"+1,User.class);
         if (user.getUsername().isEmpty()){
             return new ResponsResult(500,"登陆失败！");
         }else {
-            return new ResponsResult(200,"登录成功！");
+            return new ResponsResult(200,"登录成功！",userInfo);
         }
 
     }
