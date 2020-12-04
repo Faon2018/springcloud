@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faon.springcloud.dao.PermissionMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.faon.springcloud.entities.PermissionMenu">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="permission_id" jdbcType="INTEGER" property="permissionId" />
+        <result column="menu_id" jdbcType="INTEGER" property="menuId" />
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="table">
+        foreign_permission_menu
+    </sql>
+    <sql id="selectField">
+        id,permission_id,menu_id,status
+    </sql>
+
+
+
+
+
+</mapper>

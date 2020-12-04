@@ -1,0 +1,26 @@
+server:
+  port: 9527
+
+
+spring:
+  application:
+    name: provider-gateway-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes: #这些路由默认跨域
+      - id: consum-blog-get
+#        uri: http://localhost:80 # uri 不是 url
+        uri: lb://consum-blog-service  #动态路由
+        predicates:
+          - Path=/consum/blog/api/get/**
+      - id: consum-blog-login
+#        uri: http://localhost:80
+        uri: lb://consum-blog-service  #动态路由
+        predicates:
+          - Path=/consum/blog/api/login/**

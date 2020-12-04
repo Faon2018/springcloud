@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faon.springcloud.dao.RoleDao">
+    <resultMap id="BaseResultMap" type="com.faon.springcloud.entities.Role">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <collection property="permissions" column="id" ofType="Permission" select="com.faon.springcloud.dao.PermissionDao.selectPermissionsByRoleId"/>
+    </resultMap>
+
+    <sql id="selectField">
+        r.id,r.`name`,r.status
+    </sql>
+
+
+
+    <select id="selectRolesByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="selectField"/>
+        from
+         role r
+        inner join
+         foreign_user_role ur on ur.role_id = r.id and ur.status = 0
+        where ur.user_id = #{userId} and  r.status = 0
+    </select>
+
+
+
+</mapper>

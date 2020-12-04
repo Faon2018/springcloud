@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faon.springcloud.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.faon.springcloud.entities.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <collection property="roles" column="id" ofType="com.faon.springcloud.entities.Role" javaType="ArrayList"
+            select="com.faon.springcloud.dao.RoleDao.selectRolesByUserId" />
+
+
+    </resultMap>
+    <sql id="table">
+        `user`
+    </sql>
+
+    <sql id="selectField">
+        id,username,password
+    </sql>
+<!--    接口控制数据库表的输入-->
+<!--    <select id="selectUserById" resultMap="BaseResultMap" parameterType="map">-->
+<!--        select-->
+<!--          <include refid="selectField"/>-->
+<!--        from-->
+<!--            ${userTable}-->
+<!--        where id = #{userId}-->
+<!--    </select>-->
+
+    <select id="selectUserById" resultMap="BaseResultMap" parameterType="int">
+        select
+        <include refid="selectField"/>
+        from
+        <include refid="table"/>
+        where id = #{userId}
+    </select>
+
+
+
+    <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `user` (username,password) values (#{username},#{password})
+    </insert>
+
+</mapper>
