@@ -1,0 +1,41 @@
+service:
+  port: 8001
+spring:
+  application:
+    name: provider-user-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+  
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.faon.springcloud.entities
+
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+#数据库表
+blog:
+  table:
+    user: user
+    userRole: foreign_user_role
+    role: role
+    rolePermission: foreign_role_permission
+    permission: permission
+    permissionMenu: foreign_permission_menu
+    menu: men
+    permissionOperation: foreign_permission_operation
+    operation: operation

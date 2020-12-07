@@ -3,6 +3,8 @@ package com.faon.consumblog.controller;
 
 import com.faon.springcloud.entities.User;
 import com.faon.springcloud.util.ResponsResult;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,6 +12,7 @@ import javax.annotation.Resource;
 //@CrossOrigin(origins = "http://example.com")//允许来自example.com的请求调用
 @RequestMapping("/consum/blog/api/")//消费者对外api接口
 @RestController
+@RefreshScope
 public class TestController {
     @Resource
     private RestTemplate restTemplate;

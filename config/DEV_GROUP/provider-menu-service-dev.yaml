@@ -1,0 +1,24 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: provider-menu-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.faon.springcloud.entities
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
