@@ -3,6 +3,7 @@ package com.faon.springcloud.controller;
 import com.faon.springcloud.entities.User;
 import com.faon.springcloud.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,11 +21,20 @@ public class UserController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
-
+    @Value("${server.port}")
+    private int port;
 
 
     @GetMapping("/select/{id}")
     public User userTest(@PathVariable("id") int id){
         return userServiceImpl.selectUserById(id);
     }
+
+
+    @GetMapping("/test")
+    public String test(){
+        return "端口："+port;
+    }
+
+
 }

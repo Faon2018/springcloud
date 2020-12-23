@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService {
 
         return userDao.selectUserById(userId);
     }
+
+    @Override
+    public User selectUserByUserName(String username) {
+        return null;
+    }
 }
