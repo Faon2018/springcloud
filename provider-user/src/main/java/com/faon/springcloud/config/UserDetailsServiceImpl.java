@@ -1,13 +1,18 @@
 package com.faon.springcloud.config;
 
+import com.faon.springcloud.entities.User;
 import com.faon.springcloud.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.ArrayList;
+
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private UserService sysUserService;
+    private UserService userServiceImpl;
     @Autowired
     private SysPermissionService sysPermissionService;
 
@@ -17,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户不能为空");
         }
         //根据用户名查询用户
-        SysUser sysUser = sysUserService.selectByName(username);
+        User sysUser = userServiceImpl.selectUserByUserName(username);
         if (sysUser == null) {
             throw new RuntimeException("用户不存在");
         }
