@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: provider-gateway-service
+  boot:
+    admin:
+      client:
+        url: admin-server
   cloud:
     nacos:
       discovery:

@@ -1,5 +1,6 @@
 package com.faon.springcloud.config;
 
+import com.faon.springcloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,13 +16,13 @@ import java.io.IOException;
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
-    SysUserService sysUserService;
+    UserService userServiceImpl;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         //更新用户表上次登录时间、更新人、更新时间等字段
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SysUser sysUser = sysUserService.selectByName(userDetails.getUsername());
+        com.faon.springcloud.entities.User sysUser = userServiceImpl.selectUserByUserName(userDetails.getUsername());
         sysUser.setLastLoginTime(new Date());
         sysUser.setUpdateTime(new Date());
         sysUser.setUpdateUser(sysUser.getId());

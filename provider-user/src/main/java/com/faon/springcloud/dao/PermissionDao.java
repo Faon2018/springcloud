@@ -10,4 +10,5 @@ import java.util.List;
 public interface PermissionDao {
 
     List<Permission> selectPermissionsByRoleId(@PathVariable("roleId") int roleId);
+    List<Permission> selectPermissionsByRoleIds(int[] roleId);
 }

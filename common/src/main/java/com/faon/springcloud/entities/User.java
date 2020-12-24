@@ -6,6 +6,8 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private Integer enable;
+    private Integer isLock;
     private List<Role> roles;
 
 
@@ -32,6 +34,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
+
+    public Integer getIsLock() {
+        return isLock;
+    }
+
+    public void setIsLock(Integer isLock) {
+        this.isLock = isLock;
     }
 
     public List<Role> getRoles() {

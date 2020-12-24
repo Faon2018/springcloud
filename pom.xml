@@ -10,7 +10,6 @@
     <modules>
         <module>provider-user</module>
         <module>common</module>
-        <module>config</module>
         <module>cloud-gateway</module>
         <module>shiro</module>
     </modules>
@@ -31,6 +30,7 @@
         <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
         <spring.cloud.alibaba.version>2.2.3.RELEASE</spring.cloud.alibaba.version>
         <mybatis.spring.boot.version>2.1.4</mybatis.spring.boot.version>
+        <de.codecentric.admin.client>2.2.4</de.codecentric.admin.client>
     </properties>
 
     <!-- 子模块继承之后，提供作用：锁定版本+子modlue不用写groupId和version  -->
@@ -59,6 +59,12 @@
                 <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${de.codecentric.admin.client}</version>
             </dependency>
 
             <dependency>
