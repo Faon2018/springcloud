@@ -2,15 +2,11 @@ package com.faon.springcloud.controller;
 
 import com.faon.springcloud.entities.User;
 import com.faon.springcloud.service.impl.UserServiceImpl;
+import com.faon.springcloud.util.ResponsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -23,7 +19,11 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     @Value("${server.port}")
     private int port;
-
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public ResponsResult addUser(User user){
+        int i = userServiceImpl.addUser(user);
+        return  new ResponsResult(200,"添加成功",userServiceImpl.selectUserById(i));
+    }
 
     @GetMapping("/select/{id}")
     public User userTest(@PathVariable("id") int id){

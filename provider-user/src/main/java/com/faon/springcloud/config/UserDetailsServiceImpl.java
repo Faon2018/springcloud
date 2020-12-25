@@ -1,9 +1,12 @@
 package com.faon.springcloud.config;
 
+import com.faon.springcloud.entities.Permission;
 import com.faon.springcloud.entities.User;
+import com.faon.springcloud.service.PermissionService;
 import com.faon.springcloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userServiceImpl;
     @Autowired
-    private SysPermissionService sysPermissionService;
+    private PermissionService permissionServiceImpl;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,13 +33,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (sysUser != null) {
             //获取该用户所拥有的权限
-            List<SysPermission> sysPermissions = sysPermissionService.selectListByUser(sysUser.getId());
+            List<Permission> permissions = permissionServiceImpl.getPermissionsByUserId(sysUser.getId());
             // 声明用户授权
-            sysPermissions.forEach(sysPermission -> {
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(sysPermission.getPermissionCode());
+            permissions.forEach(permission -> {
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getName());
                 grantedAuthorities.add(grantedAuthority);
             });
         }
-        return new User(sysUser.getAccount(), sysUser.getPassword(), sysUser.getEnabled(), sysUser.getAccountNonExpired(), sysUser.getCredentialsNonExpired(), sysUser.getAccountNonLocked(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(sysUser.getUsername(), sysUser.getPassword(),grantedAuthorities);
     }
 }

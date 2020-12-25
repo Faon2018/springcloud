@@ -91,6 +91,7 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 //登入
                         and().formLogin().
                 permitAll().//允许所有用户
+                loginProcessingUrl("/user/login").
                 successHandler(authenticationSuccessHandler).//登录成功处理逻辑
                 failureHandler(authenticationFailureHandler).//登录失败处理逻辑
                 //异常处理(权限拒绝、登录失效等)

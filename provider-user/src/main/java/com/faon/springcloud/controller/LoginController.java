@@ -21,4 +21,8 @@ public class LoginController {
         return  new ResponsResult(200,"login ",user);
     }
 
+    @RequestMapping(value = "/logins",method = RequestMethod.POST)
+    public ResponsResult logins(User user){
+        return  new ResponsResult(200,"login ",user);
+    }
 }

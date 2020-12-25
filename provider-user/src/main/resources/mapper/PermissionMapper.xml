@@ -25,6 +25,14 @@
         where rp.role_id = #{roleId} and p.status = 0
     </select>
 
-
+    <select id="selectPermissionsByUserId" parameterType="int"  resultMap="BaseResultMap">
+        SELECT p.*
+        FROM `user` u
+        INNER JOIN foreign_user_role  fur ON fur.user_id = u.id AND fur.`status` = 0
+        INNER JOIN role r ON r.id = fur.role_id AND r.`status` = 0
+        INNER JOIN foreign_role_permission frp  ON frp.role_id = r.id AND frp.`status` = 0
+        INNER JOIN permission p ON p.id = frp.permission_id AND p.`status` = 0
+        where u.id = #{userId}
+    </select>
 
 </mapper>

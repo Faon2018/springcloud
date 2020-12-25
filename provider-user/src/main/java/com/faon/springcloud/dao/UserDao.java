@@ -8,10 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface UserDao {
-    int addUser(@PathVariable("user") User user);
+    int add(@PathVariable("user") User user);
     User editUserById(@PathVariable("userId") int userId);
     int deleteUserById(@PathVariable("userId") int userId);
     User selectUserById(@PathVariable("userId") int userId);
+    User selectUserByUserName(String username);
 //    User selectUserById(Map map);//每个接口控制数据表的调用
     List<User> selectUsers();
 

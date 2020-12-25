@@ -13,8 +13,9 @@ public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private PermissionDao permissionDao;
 
+
     @Override
-    public List<Permission> getPermissionsByRoleIds(int[] roleId) {
-        return permissionDao.selectPermissionsByRoleIds(roleId);
+    public List<Permission> getPermissionsByUserId(int userId) {
+        return permissionDao.selectPermissionsByUserId(userId);
     }
 }

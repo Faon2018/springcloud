@@ -35,6 +35,13 @@
         where id = #{userId}
     </select>
 
+    <select id="selectUserByUserName" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="selectField"/>
+        from
+        <include refid="table"/>
+        where username = #{username}
+    </select>
 
 
     <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">

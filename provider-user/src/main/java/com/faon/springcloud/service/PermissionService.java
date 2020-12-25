@@ -5,5 +5,5 @@ import com.faon.springcloud.entities.Permission;
 import java.util.List;
 
 public interface PermissionService {
-    List<Permission> getPermissionsByRoleIds(int [] roleId);
+    List<Permission> getPermissionsByUserId(int  userId);
 }
